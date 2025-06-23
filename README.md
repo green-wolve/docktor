@@ -1,4 +1,4 @@
-# Docktor
+# K8sDocktor
 
 **Stop debugging Kubernetes clusters manually.**
 
