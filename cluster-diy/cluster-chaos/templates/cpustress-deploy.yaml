@@ -1,0 +1,20 @@
+{{- if .Values.cpustress.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpustress
+  labels: { app: cpustress }
+spec:
+  replicas: {{ .Values.cpustress.replicas }}
+  selector:
+    matchLabels: { app: cpustress }
+  template:
+    metadata:
+      labels: { app: cpustress }
+    spec:
+      containers:
+      - name: cpu
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        command: ["stress"]
+        args: ["--cpu", "{{ .Values.cpustress.workers }}", "--timeout", "0"]
+{{- end }}

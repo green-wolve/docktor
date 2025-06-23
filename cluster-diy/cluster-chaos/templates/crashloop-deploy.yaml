@@ -1,0 +1,21 @@
+{{- if .Values.crashloop.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashloop
+  labels: { app: crashloop }
+spec:
+  replicas: {{ .Values.crashloop.replicas }}
+  selector:
+    matchLabels: { app: crashloop }
+  template:
+    metadata:
+      labels: { app: crashloop }
+    spec:
+      containers:
+      - name: boom
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        command: ["/bin/sh","-c"]
+        args: ["echo '💥 crash'; exit 1"]
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- end }}

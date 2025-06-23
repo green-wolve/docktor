@@ -1,0 +1,11 @@
+[project]
+name = "DoktorKube"
+version = "0.1.0"
+description = "AI tool for Kubernetes debugging"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langgraph",
+    "kubernetes",
+    "langchain"
+]

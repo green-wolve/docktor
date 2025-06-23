@@ -1,0 +1,26 @@
+crashloop:
+  enabled: true
+  replicas: 1
+
+oomkill:
+  enabled: false             
+  memMiB: 256                
+
+cpustress:
+  enabled: false
+  replicas: 1
+  workers: 2                 
+
+netchaos:
+  enabled: false
+  latencyMs: 300             
+  duration: "30s"
+  selector:                  
+    matchLabels:
+      app: victim
+
+image:
+  registry: docker.io
+  repo: polinux/stress        
+  tag: latest
+  pullPolicy: IfNotPresent

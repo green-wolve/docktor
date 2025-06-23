@@ -1,0 +1,16 @@
+{{- if .Values.netchaos.enabled }}
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: net-latency
+  namespace: chaos-experiments
+spec:
+  action: delay
+  mode: all
+  selector:
+{{ toYaml .Values.netchaos.selector | indent 4 }}
+  delay:
+    latency: {{ .Values.netchaos.latencyMs }}ms
+    jitter: 10ms
+  duration: {{ .Values.netchaos.duration }}
+{{- end }}

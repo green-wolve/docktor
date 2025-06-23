@@ -1,0 +1,19 @@
+{{- if .Values.oomkill.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: oomkill
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: memhog
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        command: ["stress"]
+        args: ["--vm", "1", "--vm-bytes", "{{ .Values.oomkill.memMiB }}M", "--vm-hang", "1"]
+        resources:
+          limits:
+            memory: {{ .Values.oomkill.memMiB }}Mi
+{{- end }}
