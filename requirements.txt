@@ -1,0 +1,5 @@
+langgraph>=0.2.0
+kubernetes>=30.0.0
+langchain>=0.3.0
+langchain-google-genai>=2.0.0
+typing-extensions>=4.0.0
